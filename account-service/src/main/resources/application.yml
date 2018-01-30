@@ -12,3 +12,13 @@ server:
     
 security:
   require-ssl: true
+  
+eureka:
+  instance:
+    nonSecurePortEnabled: false
+    securePortEnabled: true
+    securePort: ${PORT:8090}
+    statusPageUrl: https://localhost:${eureka.instance.securePort}/info
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
