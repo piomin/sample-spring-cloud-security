@@ -3,11 +3,14 @@ spring:
     name: account-service
 
 server:  
-  port: ${PORT:8090}
+  port: ${PORT:8091}
   ssl:
-    key-store: classpath:account-key.p12
+    enabled: true
+    key-store: classpath:test.jks
     key-store-password: 123456
-    key-store-type: PKCS12
+    trust-store: classpath:test.jks
+    trust-store-password: 123456
+#    key-store-type: PKCS12
     key-alias: account-key
     
 security:
@@ -17,8 +20,9 @@ eureka:
   instance:
     nonSecurePortEnabled: false
     securePortEnabled: true
-    securePort: ${PORT:8090}
+    securePort: ${PORT:8091}
     statusPageUrl: https://localhost:${eureka.instance.securePort}/info
   client:
+    securePortEnabled: true
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: https://localhost:8761/eureka/

@@ -4,8 +4,28 @@ spring:
 
 server:  
   port: ${PORT:8761}
-      
+  ssl:
+    enabled: true
+    key-store: classpath:test.jks
+    key-store-password: 123456
+#    key-store-type: PKCS12
+    key-alias: account-key
+    
+security:
+  require-ssl: true
+        
 eureka:
+  instance:
+    hostname: localhost
+    securePort: ${server.port}
+    securePortEnabled: true  
+    nonSecurePortEnabled: false 
+    secureVirtualHostName: ${spring.application.name}
+    homePageUrl: https://${eureka.instance.hostname}:${server.port}/
+    statusPageUrl: https://${eureka.instance.hostname}:${server.port}/admin/info
+    metadataMap:
+      hostname : ${eureka.instance.hostname}
+      securePort: ${server.port}
   client:
     registerWithEureka: false
     fetchRegistry: false
