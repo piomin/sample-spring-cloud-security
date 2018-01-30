@@ -1,0 +1,14 @@
+spring:  
+  application:
+    name: account-service
+
+server:  
+  port: ${PORT:8090}
+  ssl:
+    key-store: classpath:account-key.p12
+    key-store-password: 123456
+    key-store-type: PKCS12
+    key-alias: account-key
+    
+security:
+  require-ssl: true
