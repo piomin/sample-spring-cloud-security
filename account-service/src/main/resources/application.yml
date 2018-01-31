@@ -6,12 +6,9 @@ server:
   port: ${PORT:8091}
   ssl:
     enabled: true
-    key-store: classpath:test.jks
+    key-store: classpath:account.jks
     key-store-password: 123456
-    trust-store: classpath:test.jks
-    trust-store-password: 123456
-#    key-store-type: PKCS12
-    key-alias: account-key
+    key-alias: account
     
 security:
   require-ssl: true
@@ -22,6 +19,8 @@ eureka:
     securePortEnabled: true
     securePort: ${PORT:8091}
     statusPageUrl: https://localhost:${eureka.instance.securePort}/info
+    healthCheckUrl: https://localhost:${eureka.instance.securePort}/health
+    homePageUrl: https://localhost:${eureka.instance.securePort}
   client:
     securePortEnabled: true
     serviceUrl:

@@ -1,9 +1,17 @@
 package pl.piomin.services.account;
 
+import java.security.NoSuchAlgorithmException;
+
+import javax.net.ssl.SSLContext;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
+
+import com.netflix.discovery.DiscoveryClient;
+import com.netflix.discovery.shared.transport.jersey.EurekaJerseyClientImpl.EurekaJerseyClientBuilder;
 
 import pl.piomin.services.account.model.Account;
 import pl.piomin.services.account.repository.AccountRepository;
@@ -30,5 +38,19 @@ public class AccountApplication {
 		repository.add(new Account("1234567898", 50000, 3L));
 		return repository;
 	}
-
+	
+	@Bean
+	public DiscoveryClient.DiscoveryClientOptionalArgs discoveryClientOptionalArgs() throws NoSuchAlgorithmException {
+		DiscoveryClient.DiscoveryClientOptionalArgs args = new DiscoveryClient.DiscoveryClientOptionalArgs();
+//		SSLContext sslContext = SSLContext.getDefault();
+		EurekaJerseyClientBuilder builder = new EurekaJerseyClientBuilder();
+		builder.withCustomSSL(null);
+		builder.withClientName("account-client");
+		builder.withTrustStoreFile("src/main/resources/account.jks", "123456");
+		builder.withMaxTotalConnections(10);
+		builder.withMaxConnectionsPerHost(10);
+		args.setEurekaJerseyClient(builder.build());
+		return args;
+	}
+	
 }
