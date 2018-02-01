@@ -1,50 +1,52 @@
-package pl.piomin.services.account;
+package pl.piomin.services.order;
 
 import java.security.NoSuchAlgorithmException;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.netflix.feign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.filter.CommonsRequestLoggingFilter;
 
 import com.netflix.discovery.DiscoveryClient;
 import com.netflix.discovery.shared.transport.jersey.EurekaJerseyClientImpl.EurekaJerseyClientBuilder;
 
-import pl.piomin.services.account.model.Account;
-import pl.piomin.services.account.repository.AccountRepository;
+import pl.piomin.services.order.repository.OrderRepository;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-public class AccountApplication {
-
+@EnableFeignClients
+public class OrderApplication {
+	
 	public static void main(String[] args) {
-		new SpringApplicationBuilder(AccountApplication.class).web(true).run(args);
+		new SpringApplicationBuilder(OrderApplication.class).web(true).run(args);
+	}
+	
+	@Bean
+	OrderRepository repository() {
+		return new OrderRepository();
 	}
 
 	@Bean
-	AccountRepository repository() {
-		AccountRepository repository = new AccountRepository();
-		repository.add(new Account("1234567890", 50000, 1L));
-		repository.add(new Account("1234567891", 50000, 1L));
-		repository.add(new Account("1234567892", 0, 1L));
-		repository.add(new Account("1234567893", 50000, 2L));
-		repository.add(new Account("1234567894", 0, 2L));
-		repository.add(new Account("1234567895", 50000, 2L));
-		repository.add(new Account("1234567896", 0, 3L));
-		repository.add(new Account("1234567897", 50000, 3L));
-		repository.add(new Account("1234567898", 50000, 3L));
-		return repository;
+	public CommonsRequestLoggingFilter requestLoggingFilter() {
+	    CommonsRequestLoggingFilter loggingFilter = new CommonsRequestLoggingFilter();
+	    loggingFilter.setIncludePayload(true);
+	    loggingFilter.setIncludeHeaders(true);
+	    loggingFilter.setMaxPayloadLength(1000);
+	    loggingFilter.setAfterMessagePrefix("REQ:");
+	    return loggingFilter;
 	}
 	
 	@Bean
 	public DiscoveryClient.DiscoveryClientOptionalArgs discoveryClientOptionalArgs() throws NoSuchAlgorithmException {
 		DiscoveryClient.DiscoveryClientOptionalArgs args = new DiscoveryClient.DiscoveryClientOptionalArgs();
-		System.setProperty("javax.net.ssl.keyStore", "src/main/resources/account.jks");
+		System.setProperty("javax.net.ssl.keyStore", "src/main/resources/order.jks");
 		System.setProperty("javax.net.ssl.keyStorePassword", "123456");
-		System.setProperty("javax.net.ssl.trustStore", "src/main/resources/account.jks");
+		System.setProperty("javax.net.ssl.trustStore", "src/main/resources/order.jks");
 		System.setProperty("javax.net.ssl.trustStorePassword", "123456");
 		EurekaJerseyClientBuilder builder = new EurekaJerseyClientBuilder();
-		builder.withClientName("account-client");
+		builder.withClientName("order-client");
 		builder.withSystemSSLConfiguration();
 		builder.withMaxTotalConnections(10);
 		builder.withMaxConnectionsPerHost(10);

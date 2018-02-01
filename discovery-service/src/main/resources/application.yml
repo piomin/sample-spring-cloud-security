@@ -6,9 +6,11 @@ server:
   port: ${PORT:8761}
   ssl:
     enabled: true
+    client-auth: need
     key-store: classpath:discovery.jks
     key-store-password: 123456
-#    key-store-type: PKCS12
+    trust-store: classpath:discovery.jks
+    trust-store-password: 123456
     key-alias: discovery
     
 security:
