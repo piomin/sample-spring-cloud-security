@@ -34,6 +34,7 @@
 		<module>customer-service</module>
 		<module>order-service</module>
 		<module>product-service</module>
+		<module>config-service</module>
 	</modules>
 	
 </project>
