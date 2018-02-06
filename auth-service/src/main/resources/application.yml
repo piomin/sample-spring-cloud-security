@@ -13,3 +13,4 @@ security:
     client:
       client-id: piotr.minkowski
       client-secret: 123456
+      scope: read

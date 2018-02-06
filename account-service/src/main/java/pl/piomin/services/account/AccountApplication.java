@@ -3,6 +3,7 @@ package pl.piomin.services.account;
 import java.security.NoSuchAlgorithmException;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
@@ -15,6 +16,7 @@ import pl.piomin.services.account.repository.AccountRepository;
 
 @SpringBootApplication
 @EnableDiscoveryClient
+@EnableOAuth2Sso
 public class AccountApplication {
 
 	public static void main(String[] args) {
