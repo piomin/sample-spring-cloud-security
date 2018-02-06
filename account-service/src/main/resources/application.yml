@@ -4,6 +4,9 @@ spring:
 
 server:  
   port: ${PORT:8091}
+  session:
+    cookie:
+      name: UISESSION
 #  ssl:
 #    enabled: true
 #    key-store: classpath:account.jks
@@ -22,17 +25,19 @@ eureka:
     securePortEnabled: true
     serviceUrl:
       defaultZone: https://localhost:8761/eureka/
-      
+
+logging:
+  level:
+    org.springframework.security: debug
+          
 security:
-  user:
-    name: root
-    password: password
+  basic:
+    enabled: false
   oauth2:
     client:
       clientId: piotr.minkowski
       clientSecret: 123456
-      accessTokenUri: http://localhost:9999/oauth/access_token
+      accessTokenUri: http://localhost:9999/oauth/token
       userAuthorizationUri: http://localhost:9999/oauth/authorize
-      clientAuthenticationScheme: form
     resource:
       userInfoUri: http://localhost:9999/user

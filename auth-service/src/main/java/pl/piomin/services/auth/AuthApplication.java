@@ -2,9 +2,10 @@ package pl.piomin.services.auth;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 
 @SpringBootApplication
-//@EnableResourceServer
+@EnableResourceServer
 //@EnableAuthorizationServer
 public class AuthApplication {
 

@@ -6,11 +6,17 @@ server:
   port: ${PORT:9999}
 
 security:
-  user:
-    name: root
-    password: password
-  oauth2:
-    client:
-      client-id: piotr.minkowski
-      client-secret: 123456
-      scope: read
+  basic:
+    enabled: false
+#  user:
+#    name: root
+#    password: password
+#  oauth2:
+#    client:
+#      client-id: piotr.minkowski
+#      client-secret: 123456
+#      scope: read
+
+logging:
+  level:
+    org.springframework.security: debug
