@@ -1,8 +1,11 @@
 spring:  
   application:
     name: account-service
+  security:
+    user:
+      password: '{cipher}AQDDqhpwfKGBPf1KZ0lPuHpRHb1mGTdRt3VMioFhTFyNaVJB5Sn+3zguMJUUntXq3Sib/2zg8n6RG5DHKApXCd5DeVicrOkarqrWVRFc2VO10Yg6anGvHRfqWKD0D7T8xXGrDx0i06UR2sj5ZyNRiGT/Lzy+2pWMxZrSepP9caiVKElLt1a/oTwyiTECA2A/5KulHG39+bJPEeZqycLffmjdwWAy3DXxDmDbEqsxsTnCD9wE9Dc4etl1eWhtHG1UR8QkPmUti+eqj2rDzAqr59p4FHlbc6VnGgUmL2fz2MQFqzghdGaBhWLuC5v/TdpqJsyred2o7n653opDD5NeEZRy1/Uipwu9hf563mM9wCLyKj6lx2ieuNag6YSOiKTHVCU='
 
-server:  
+server:
   port: ${PORT:8091}
   ssl:
     enabled: true

@@ -5,3 +5,10 @@ spring:
     config:
       failFast: true
       uri: https://localhost:8888
+
+encrypt:
+  keyStore:
+    location: classpath:/discovery.jks
+    password: 123456
+    alias: discovery
+    secret: 123456
