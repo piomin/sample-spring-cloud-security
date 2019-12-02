@@ -17,6 +17,8 @@ spring:
       server:
         encrypt:
           enabled: false
+  profiles:
+    active: native
   
 encrypt:
   keyStore:
