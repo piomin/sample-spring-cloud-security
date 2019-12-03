@@ -34,8 +34,6 @@ public class SSLConfigServiceBootstrapConfiguration {
 	@Bean
 	public ConfigServicePropertySourceLocator configServicePropertySourceLocator() throws Exception {
 		final char[] password = "123456".toCharArray();
-		final TrustStrategy trustStrategy = (X509Certificate[] chain, String authType) -> true;
-//		final File keyStoreFile = new File("src/main/resources/account.jks");
 		final ClassPathResource resource = new ClassPathResource("discovery.jks");
 
 		SSLContext sslContext = SSLContexts.custom()
@@ -50,21 +48,5 @@ public class SSLConfigServiceBootstrapConfiguration {
 		configServicePropertySourceLocator.setRestTemplate(new RestTemplate(requestFactory));
 		return configServicePropertySourceLocator;
 	}
-
-//	@Bean
-//	public RestTemplate template() throws Exception {
-//		final char[] password = "123456".toCharArray();
-//		final TrustStrategy trustStrategy = (X509Certificate[] chain, String authType) -> true;
-//		final File keyStoreFile = new File("src/main/resources/discovery.jks");
-//		SSLContext sslContext = SSLContexts.custom()
-//				.loadKeyMaterial(keyStoreFile, password, password)
-//				.loadTrustMaterial(keyStoreFile, password, new TrustSelfSignedStrategy()).build();
-//		CloseableHttpClient httpClient = HttpClients.custom()
-//				.setSSLContext(sslContext)
-//				.setSSLHostnameVerifier((s, sslSession) -> true)
-//				.build();
-//		HttpComponentsClientHttpRequestFactory requestFactory = new HttpComponentsClientHttpRequestFactory(httpClient);
-//		return new RestTemplate(requestFactory);
-//	}
 
 }
