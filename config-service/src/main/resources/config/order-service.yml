@@ -1,6 +1,6 @@
 spring:  
   application:
-    name: account-service
+    name: order-service
   security:
     user:
       password: '{cipher}AQBhpDVYHANrg59OGY7ioSbMdOrH7ZA0vfa2VqIvfxJK5vQpZc569uGHyVylsmWFZVMdA0rhYbg169QngcisojEpojVRQHwcw4nYPuPIz2GV8w2OsFhDvZiLwmHKd8jrT+/prTsKjtZ6N+OUVLCuZEaKY605oNk0Sevkwkp5eXGiHZEr52wfX7+tuEusTRUXt3C+hZrFuvT7psZXmQmeqWKHnrDRqbA9vFRMomKNjoF/LQcTEyQHiFsI6/4BryMe4s8Bjax0yUvaBFboUvKVhoXYOEG5CzwlGB9kyav3h+OLBGVZlasCCfPjmlVdGkr0iv/Euh0vkaa6lC9556PxwjZ7Gp1kRw36xkgRQveEDjAomwpXMXD9qpDHFyK903gh+sI='
