@@ -24,7 +24,7 @@ public class SSLConfigServiceBootstrapConfiguration {
 	@Bean
 	public ConfigServicePropertySourceLocator configServicePropertySourceLocator() throws Exception {
 		final char[] password = "123456".toCharArray();
-		final ClassPathResource resource = new ClassPathResource("discovery.jks");
+		final ClassPathResource resource = new ClassPathResource("account.jks");
 
 		SSLContext sslContext = SSLContexts.custom()
 				.loadKeyMaterial(resource.getFile(), password, password)
