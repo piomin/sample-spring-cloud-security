@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: account-service
+  cloud:
+    config:
+      failFast: true
+      uri: https://localhost:8888
+      tls:
+        enabled: true
+        key-store: classpath:/account.jks
+        key-store-password: 123456
+        key-password: 123456
+        trust-store: classpath:/account.jks
+        trust-store-password: 123456
+  config:
+    import: optional:configserver:https://localhost:8888
+
+encrypt:
+  keyStore:
+    location: classpath:/discovery.jks
+    password: 123456
+    alias: discovery
+    secret: 123456

@@ -1,4 +1,4 @@
-server:  
+server:
   port: ${PORT:8888}
   ssl:
     enabled: true
@@ -8,7 +8,7 @@ server:
     trust-store: classpath:discovery.jks
     trust-store-password: 123456
     key-alias: discovery
-        
+
 spring:
   application:
     name: config-service
@@ -19,7 +19,7 @@ spring:
           enabled: false
   profiles:
     active: native
-  
+
 encrypt:
   keyStore:
     location: classpath:/discovery.jks

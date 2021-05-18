@@ -1,7 +1,13 @@
 package pl.piomin.services.account;
 
+import java.io.IOException;
+import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
+import java.security.UnrecoverableKeyException;
+import java.security.cert.CertificateException;
 
+import org.apache.http.conn.ssl.TrustSelfSignedStrategy;
+import org.apache.http.ssl.SSLContexts;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -11,8 +17,11 @@ import org.springframework.context.annotation.Bean;
 import com.netflix.discovery.DiscoveryClient;
 import com.netflix.discovery.shared.transport.jersey.EurekaJerseyClientImpl.EurekaJerseyClientBuilder;
 
+import org.springframework.core.io.ClassPathResource;
 import pl.piomin.services.account.model.Account;
 import pl.piomin.services.account.repository.AccountRepository;
+
+import javax.net.ssl.SSLContext;
 
 @SpringBootApplication
 @EnableDiscoveryClient
@@ -38,17 +47,20 @@ public class AccountApplication {
 	}
 	
 	@Bean
-	public DiscoveryClient.DiscoveryClientOptionalArgs discoveryClientOptionalArgs() throws NoSuchAlgorithmException {
+	public DiscoveryClient.DiscoveryClientOptionalArgs discoveryClientOptionalArgs() throws Exception {
 		DiscoveryClient.DiscoveryClientOptionalArgs args = new DiscoveryClient.DiscoveryClientOptionalArgs();
-		System.setProperty("javax.net.ssl.keyStore", "src/main/resources/account.jks");
-		System.setProperty("javax.net.ssl.keyStorePassword", "123456");
-		System.setProperty("javax.net.ssl.trustStore", "src/main/resources/account.jks");
-		System.setProperty("javax.net.ssl.trustStorePassword", "123456");
+		final char[] password = "123456".toCharArray();
+		final ClassPathResource resource = new ClassPathResource("account.jks");
+
+		SSLContext sslContext = SSLContexts.custom()
+				.loadKeyMaterial(resource.getFile(), password, password)
+				.loadTrustMaterial(resource.getFile(), password, new TrustSelfSignedStrategy()).build();
+
 		EurekaJerseyClientBuilder builder = new EurekaJerseyClientBuilder();
 		builder.withClientName("account-client");
-		builder.withSystemSSLConfiguration();
 		builder.withMaxTotalConnections(10);
 		builder.withMaxConnectionsPerHost(10);
+		builder.withCustomSSL(sslContext);
 		args.setEurekaJerseyClient(builder.build());
 		return args;
 	}
