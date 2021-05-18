@@ -2,19 +2,19 @@ package pl.piomin.services.customer;
 
 import java.security.NoSuchAlgorithmException;
 
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.cloud.netflix.feign.EnableFeignClients;
-import org.springframework.context.annotation.Bean;
-import org.springframework.web.filter.CommonsRequestLoggingFilter;
-
 import com.netflix.discovery.DiscoveryClient;
 import com.netflix.discovery.shared.transport.jersey.EurekaJerseyClientImpl.EurekaJerseyClientBuilder;
-
 import pl.piomin.services.customer.model.Customer;
 import pl.piomin.services.customer.model.CustomerType;
 import pl.piomin.services.customer.repository.CustomerRepository;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.filter.CommonsRequestLoggingFilter;
 
 @SpringBootApplication
 @EnableDiscoveryClient
@@ -22,7 +22,7 @@ import pl.piomin.services.customer.repository.CustomerRepository;
 public class CustomerApplication {
 	
 	public static void main(String[] args) {
-		new SpringApplicationBuilder(CustomerApplication.class).web(true).run(args);
+		SpringApplication.run(CustomerApplication.class, args);
 	}
 
 	@Bean
