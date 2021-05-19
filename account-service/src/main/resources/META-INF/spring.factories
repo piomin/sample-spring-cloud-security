@@ -1,0 +1,1 @@
+org.springframework.cloud.bootstrap.BootstrapConfiguration = pl.piomin.services.account.SSLConfigServiceBootstrapConfiguration

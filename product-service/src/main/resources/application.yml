@@ -1,6 +1,19 @@
 spring:  
   application:
     name: product-service
+  cloud:
+    config:
+      failFast: true
+      uri: https://localhost:8888
+      tls:
+        enabled: true
+        key-store: classpath:/product.jks
+        key-store-password: 123456
+        key-password: 123456
+        trust-store: classpath:/product.jks
+        trust-store-password: 123456
+  config:
+    import: optional:configserver:https://localhost:8888
 
 server:  
   port: ${PORT:8093}

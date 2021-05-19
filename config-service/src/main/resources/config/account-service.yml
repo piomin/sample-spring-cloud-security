@@ -1,0 +1,30 @@
+spring:  
+  application:
+    name: account-service
+  security:
+    user:
+      password: '{cipher}AQBhpDVYHANrg59OGY7ioSbMdOrH7ZA0vfa2VqIvfxJK5vQpZc569uGHyVylsmWFZVMdA0rhYbg169QngcisojEpojVRQHwcw4nYPuPIz2GV8w2OsFhDvZiLwmHKd8jrT+/prTsKjtZ6N+OUVLCuZEaKY605oNk0Sevkwkp5eXGiHZEr52wfX7+tuEusTRUXt3C+hZrFuvT7psZXmQmeqWKHnrDRqbA9vFRMomKNjoF/LQcTEyQHiFsI6/4BryMe4s8Bjax0yUvaBFboUvKVhoXYOEG5CzwlGB9kyav3h+OLBGVZlasCCfPjmlVdGkr0iv/Euh0vkaa6lC9556PxwjZ7Gp1kRw36xkgRQveEDjAomwpXMXD9qpDHFyK903gh+sI='
+
+server:
+  port: ${PORT:8091}
+  ssl:
+    enabled: true
+    key-store: classpath:account.jks
+    key-store-password: 123456
+    key-alias: account
+    
+security:
+  require-ssl: true
+  
+eureka:
+  instance:
+    nonSecurePortEnabled: false
+    securePortEnabled: true
+    securePort: ${PORT:8091}
+    statusPageUrl: https://localhost:${eureka.instance.securePort}/info
+    healthCheckUrl: https://localhost:${eureka.instance.securePort}/health
+    homePageUrl: https://localhost:${eureka.instance.securePort}
+  client:
+    securePortEnabled: true
+    serviceUrl:
+      defaultZone: https://localhost:8761/eureka/
