@@ -26,6 +26,13 @@
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
+			<dependency>
+				<groupId>org.springframework.vault</groupId>
+				<artifactId>spring-vault-dependencies</artifactId>
+				<version>2.3.1</version>
+				<scope>import</scope>
+				<type>pom</type>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -33,6 +40,7 @@
 		<module>account-service</module>
 		<module>discovery-service</module>
 		<module>customer-service</module>
+		<module>gateway-service</module>
 		<module>order-service</module>
 		<module>product-service</module>
 		<module>config-service</module>
