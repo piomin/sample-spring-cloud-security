@@ -39,3 +39,6 @@ spring:
 logging:
   level:
     org.springframework.security: debug
+
+vault:
+  token: s.XuO08HGNjr5YvXPQXillZxwc
