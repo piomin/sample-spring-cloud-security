@@ -44,6 +44,7 @@
 		<module>order-service</module>
 		<module>product-service</module>
 		<module>config-service</module>
+        <module>kubernetes</module>
 	</modules>
 	
 </project>

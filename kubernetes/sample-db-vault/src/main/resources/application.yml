@@ -1,0 +1,43 @@
+spring:
+  application:
+    name: sample-db-vault
+  datasource:
+    url: jdbc:postgresql://postgres:5432/postgres
+    password: admin123
+    username: postgres
+  jpa:
+    hibernate:
+      ddl-auto: create
+  cloud:
+    vault:
+      uri: http://vault.vault:8200
+      authentication: KUBERNETES
+      database:
+        enabled: true
+        role: default
+        backend: database
+        username-property: spring.datasource.username
+        password-property: spring.datasource.password
+      postgresql:
+        enabled: true
+        role: default
+        backend: database
+        username-property: spring.datasource.username
+        password-property: spring.datasource.password
+      kubernetes:
+        role: internal-app
+        kubernetes-path: kubernetes
+        service-account-token-file: /var/run/secrets/kubernetes.io/serviceaccount/token
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint.health:
+    show-details: always
+    group:
+      readiness:
+        include: db
+    probes:
+      enabled: true
