@@ -54,3 +54,8 @@ vault write database/roles/default db_name=postgres \
     default_ttl="1m" \
     max_ttl="60m"
 ```
+
+Test role:
+```shell
+vault read database/creds/default
+```
