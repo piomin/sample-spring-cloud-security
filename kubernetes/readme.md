@@ -83,7 +83,7 @@ spec:
     spec:
       containers:
       - name: sample-app
-        image: piomin/sample-app:1.0
+        image: piomin/sample-app:1.1
         ports:
         - containerPort: 8080
       serviceAccountName: internal-app

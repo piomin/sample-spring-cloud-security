@@ -3,7 +3,7 @@ package pl.piomin.services.kubernetes.vault.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "persons")
+//@Table(name = "persons")
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

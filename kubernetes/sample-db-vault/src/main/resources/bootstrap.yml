@@ -3,9 +3,9 @@ spring:
     name: sample-db-vault
   datasource:
     url: jdbc:postgresql://postgresql:5432/postgres
-  jpa:
-    hibernate:
-      ddl-auto: update
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
   cloud:
     vault:
       config.lifecycle:
