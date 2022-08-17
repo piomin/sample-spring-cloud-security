@@ -2,7 +2,7 @@ spring:
   application:
     name: sample-db-vault
   datasource:
-    url: jdbc:postgresql://postgres:5432/postgres
+    url: jdbc:postgresql://postgresql:5432/postgres
   jpa:
     hibernate:
       ddl-auto: update
@@ -21,7 +21,9 @@ spring:
         backend: database
       kubernetes:
         role: internal-app
-
+  liquibase:
+    change-log:
+      classpath:changelog/changeLog.sql
 #management:
 #  endpoints:
 #    web:
