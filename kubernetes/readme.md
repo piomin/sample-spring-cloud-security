@@ -1,3 +1,8 @@
+## SealedSecrets (to compare)
+```shell
+cat jira-token-secret.yaml | kubeseal --controller-namespace sealed-secrets --controller-name sealed-secrets -o yaml --scope strict > jira-token-sealed-secret.yaml
+```
+
 ## Vault instructions
 
 Enable Kubernetes auth:
