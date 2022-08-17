@@ -98,4 +98,18 @@ spec:
     app: sample-app
   ports:
   - port: 8080
+---
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: sample-app-service
+  namespace: demo-apps
+spec:
+  to:
+    kind: Service
+    name: sample-app-service
+    weight: 100
+  port:
+    targetPort: 8080
+  wildcardPolicy: None
 ```
